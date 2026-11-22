@@ -98,6 +98,7 @@ nav.scrolled{background:rgba(21,23,26,.82);backdrop-filter:blur(14px);-webkit-ba
 /* Problem */
 .problem{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:54px}
+.problem .cols{grid-template-columns:repeat(2,1fr)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px;transition:.3s;position:relative;overflow:hidden}
 .card p{color:var(--muted);font-size:.98rem}
 .ico{width:46px;height:46px;border-radius:13px;background:rgba(168,196,212,.1);display:grid;place-items:center;margin-bottom:20px}
@@ -213,7 +214,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr}
   .phone-stage{margin-top:30px}
-  .cols,.steps,.fgrid,.mini{grid-template-columns:1fr}
+  .cols,.problem .cols,.steps,.fgrid,.mini{grid-template-columns:1fr}
   .fgrid .card.big,.fgrid .card.wide{grid-column:auto}
   .plans{grid-template-columns:1fr!important}
   .nav-links{display:none}
@@ -324,11 +325,6 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
         <p>Prüfung überfällig, und keiner hat es gemerkt. Das kostet Geld und im Ernstfall mehr.</p>
       </div>
       <div class="card rv d1">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg></div>
-        <h3>Zettel überall</h3>
-        <p>Ordner, Klemmbretter, Notizen am Gerät. Wer was wann geprüft hat, weiß am Ende niemand mehr sicher.</p>
-      </div>
-      <div class="card rv d2">
         <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
         <h3>Kein sauberer Nachweis</h3>
         <p>Wenn es darauf ankommt, fehlt die lückenlose Dokumentation. Genau die brauchst du dann.</p>
@@ -430,8 +426,6 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
           <li>Bis zu <b>100 Geräte</b> und Positionen</li>
           <li>Bis zu <b>20 Nutzer</b> (Meister, Mitarbeiter, Sicherheitsbeauftragte)</li>
           <li>Maschinen und Personal (Unterweisungen)</li>
-          <li>Alle Einstellmöglichkeiten</li>
-          <li>Fertige Unterweisungen nach Bereich</li>
           <li>QR-Codes und PDF-Nachweise ohne Limit</li>
         </ul>
         <a href="https://snowvoolve.github.io/wartungsbuch/" target="_blank" rel="noopener" class="btn btn-primary">Ultimate testen</a>
@@ -444,8 +438,6 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
           <li>Bis zu <b>50 Geräte</b></li>
           <li>Bis zu <b>10 Nutzer</b></li>
           <li>Maschinen und Personal</li>
-          <li>Viele Einstellmöglichkeiten</li>
-          <li>Fertige Unterweisungen nach Bereich</li>
           <li>QR-Codes und PDF-Nachweise</li>
         </ul>
         <a href="https://snowvoolve.github.io/wartungsbuch/" target="_blank" rel="noopener" class="btn btn-ghost">Premium testen</a>
@@ -457,8 +449,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
         <ul>
           <li><b>5 Geräte</b> nach Wahl</li>
           <li><b>2 Nutzer</b> für Wartung und Dokumentation</li>
-          <li>Eigene Unterweisungen hochladen</li>
-          <li>Grundeinstellungen</li>
+          <li>Unterweisungen mit Link zu Unterlagen</li>
           <li>QR-Codes und PDF-Nachweise</li>
         </ul>
         <a href="https://snowvoolve.github.io/wartungsbuch/" target="_blank" rel="noopener" class="btn btn-ghost">Starter testen</a>
@@ -474,13 +465,11 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
           <tr><td>Wartung, Prüfungen, Fristen</td><td class="y"></td><td class="y"></td><td class="y"></td></tr>
           <tr><td>QR-Code pro Gerät</td><td class="y"></td><td class="y"></td><td class="y"></td></tr>
           <tr><td>PDF-Nachweis</td><td class="y"></td><td class="y"></td><td class="y"></td></tr>
-          <tr><td>Personal und Unterweisungen</td><td class="y"></td><td class="y"></td><td>eigene Dokumente</td></tr>
-          <tr><td>Fertige Unterweisungen</td><td class="y"></td><td class="y"></td><td class="n"></td></tr>
-          <tr><td>Einstellmöglichkeiten</td><td>alle</td><td>viele</td><td>Grundlagen</td></tr>
+          <tr><td>Personal und Unterweisungen</td><td class="y"></td><td class="y"></td><td class="y"></td></tr>
         </tbody>
       </table>
     </div>
-    <p class="note">Monatlich kündbar, keine Einrichtungsgebühr. Bei Jahreszahlung sind 2 Monate geschenkt. Du richtest alles selbst ein, in jedem Paket. Preise und Geräte-Zahlen sind Startwerte für die Testphase und können sich noch ändern.</p>
+    <p class="note">Monatlich kündbar, keine Einrichtungsgebühr. Bei Jahreszahlung sind 2 Monate geschenkt. Du richtest alles selbst ein, in jedem Paket. Preise und Geräte-Zahlen sind Startwerte für die Testphase und können sich noch ändern. Nutzerkonten mit Anmeldung kommen mit der nächsten Version.</p>
   </div>
 </section>
 
