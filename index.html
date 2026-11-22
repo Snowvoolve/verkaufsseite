@@ -173,6 +173,8 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
 .snd svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .snd .w{display:none}.snd[aria-pressed="true"] .w{display:inline}.snd[aria-pressed="true"] .x{display:none}
 .snd[aria-pressed="true"]{border-color:var(--ice);color:var(--ice)}
+
+.card .soon{position:absolute;top:18px;right:18px;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr}
   .phone-stage{margin-top:30px}
@@ -349,6 +351,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
   <div class="wrap">
     <span class="eyebrow rv">Funktionen</span>
     <h2 class="rv d1">Alles, was ein Wartungsbuch können muss</h2>
+    <p class="lead rv d2">Mit „Geplant“ markierte Funktionen sind in Arbeit und kommen in den nächsten Schritten dazu.</p>
     <div class="fgrid">
       <div class="card big rv">
         <div class="ico"><svg viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 00-5 5L3 18l3 3 6.5-6.5a4 4 0 005-5l-3 3-2.5-.5-.5-2.5z"/></svg></div>
@@ -376,6 +379,42 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
         <div class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
         <h3>Handy, Tablet, PC</h3>
         <p>Läuft im Browser und lässt sich als App aufs Handy installieren.</p>
+      </div>
+      <div class="card big rv">
+        <span class="soon">Geplant</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Ampel-Übersicht</h3>
+        <p>Grün: alles in Ordnung. Gelb: bald fällig. Rot: überfällig. Beim Öffnen siehst du sofort, was ansteht, ohne Listen zu durchsuchen.</p>
+      </div>
+      <div class="card rv d1">
+        <span class="soon">Geplant</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1112 0v5l2 2H4z"/><path d="M10 20a2 2 0 004 0"/></svg></div>
+        <h3>Erinnerung vor der Frist</h3>
+        <p>Per Mail oder Handy-Hinweis, zum Beispiel 14 Tage vorher. So rutscht keine Prüfung mehr durch.</p>
+      </div>
+      <div class="card rv d2">
+        <span class="soon">Geplant</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg></div>
+        <h3>Foto und Notiz</h3>
+        <p>Mangel fotografieren, kurz beschreiben, fertig. Das Bild hängt direkt an der Prüfung und im PDF.</p>
+      </div>
+      <div class="card rv">
+        <span class="soon">Geplant</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
+        <h3>Mängel melden</h3>
+        <p>Mitarbeiter melden "Schutzhaube locker". Der Meister setzt es auf "in Arbeit" und dann auf "behoben". Alles bleibt nachvollziehbar.</p>
+      </div>
+      <div class="card rv d1">
+        <span class="soon">Geplant</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></div>
+        <h3>Gerät sperren</h3>
+        <p>"Außer Betrieb bis repariert": Beim Scannen steht es sofort am Gerät, bevor jemand damit arbeitet.</p>
+      </div>
+      <div class="card big rv d2">
+        <span class="soon">Geplant</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg></div>
+        <h3>Dokumente am Gerät</h3>
+        <p>Handbuch, Prüfprotokoll und CE-Kennzeichnung hängen am Gerät und sind per QR-Code sofort greifbar.</p>
       </div>
     </div>
   </div>
