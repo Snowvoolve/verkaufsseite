@@ -6,10 +6,17 @@
 <title>Test Firmenname – Das digitale Wartungsbuch</title>
 <meta name="description" content="Das digitale Wartungsbuch für Betriebe: Maschinen anlegen, QR-Code ans Gerät, scannen, Prüfung abhaken. Fristen im Blick, Nachweis per PDF.">
 <meta name="theme-color" content="#15171A">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Tenor+Sans&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2315171A'/%3E%3Cpath d='M8 16.5l5.5 5.5L24 10' fill='none' stroke='%23A8C4D4' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta property="og:title" content="Test Firmenname – Das digitale Wartungsbuch">
+<meta property="og:description" content="Maschinen und Geräte anlegen, QR-Code ans Gerät, scannen, Prüfung abhaken. Fristen im Blick, Nachweis per PDF.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta name="robots" content="noindex">
 <style>
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(fonts/inter-400.ttf) format("truetype")}
+@font-face{font-family:Inter;font-weight:500;font-display:swap;src:url(fonts/inter-500.ttf) format("truetype")}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(fonts/inter-600.ttf) format("truetype")}
+@font-face{font-family:"Tenor Sans";font-weight:400;font-display:swap;src:url(fonts/tenor-sans.ttf) format("truetype")}
 :root{
   --bg:#15171A; --bg2:#1B1E22; --card:#1F2327; --line:rgba(199,204,209,.12);
   --silver:#C7CCD1; --ice:#A8C4D4; --ice2:#7FA6BC; --off:#F0EEE9; --muted:#9AA1A8;
@@ -55,7 +62,7 @@ nav.scrolled{background:rgba(21,23,26,.82);backdrop-filter:blur(14px);-webkit-ba
 .btn-sm{padding:10px 18px;font-size:.92rem}
 
 /* Hero */
-.hero{padding:170px 0 100px;overflow:clip}
+.hero{padding:170px 0 100px;overflow:clip;position:relative}
 .hero .orb{top:-200px;right:-150px}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative}
 .hero h1 em{font-style:normal;color:var(--ice)}
@@ -212,6 +219,9 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
   section{padding:80px 0}
 }
 @media(max-width:560px){
+  .wrap{padding:0 16px}
+  .nav-in .logo{font-size:1rem;gap:8px}
+  .nav-in .btn-sm{padding:9px 13px;font-size:.84rem}
   .plans{grid-template-columns:1fr}
   .hero{padding-top:130px}
   .qr-float{left:0;width:96px}
@@ -240,7 +250,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
       <a href="#pakete">Pakete</a>
       <a href="#faq">Fragen</a>
     </div>
-    <a href="#kontakt" class="btn btn-primary btn-sm">Interesse melden</a>
+    <a href="#kontakt" class="btn btn-primary btn-sm js-mail" data-paket="Allgemein">Interesse melden</a>
   </div>
 </nav>
 
@@ -252,7 +262,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
       <h1 class="rv d1">Jede Wartung <em>erledigt.</em><br>Jeder Nachweis <em>griffbereit.</em></h1>
       <p class="lead rv d2">Maschinen und Geräte anlegen, QR-Code ans Gerät kleben, scannen, Prüfung abhaken. Fristen behältst du im Blick, den Nachweis gibt es per Knopfdruck als PDF. Ohne Zettelwirtschaft und ohne Einrichtung durch uns.</p>
       <div class="cta-row rv d3">
-        <a href="#kontakt" class="btn btn-primary">Kostenlos testen</a>
+        <a href="#kontakt" class="btn btn-primary js-mail" data-paket="Allgemein">Kostenlos testen</a>
         <a href="#ablauf" class="btn btn-ghost">So funktioniert es</a>
       </div>
       <div class="trust rv d3">
@@ -526,7 +536,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
           <li>Fertige Unterweisungen nach Bereich</li>
           <li>QR-Codes und PDF-Nachweise ohne Limit</li>
         </ul>
-        <a href="#kontakt" class="btn btn-primary">Ultimate testen</a>
+        <a href="#kontakt" class="btn btn-primary js-mail" data-paket="Ultimate">Ultimate testen</a>
       </div>
       <div class="plan rv d1">
         <h3>Premium</h3>
@@ -540,7 +550,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
           <li>Fertige Unterweisungen nach Bereich</li>
           <li>QR-Codes und PDF-Nachweise</li>
         </ul>
-        <a href="#kontakt" class="btn btn-ghost">Premium testen</a>
+        <a href="#kontakt" class="btn btn-ghost js-mail" data-paket="Premium">Premium testen</a>
       </div>
       <div class="plan rv d2">
         <h3>Starter</h3>
@@ -553,7 +563,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
           <li>Grundeinstellungen</li>
           <li>QR-Codes und PDF-Nachweise</li>
         </ul>
-        <a href="#kontakt" class="btn btn-ghost">Starter testen</a>
+        <a href="#kontakt" class="btn btn-ghost js-mail" data-paket="Starter">Starter testen</a>
       </div>
     </div>
 
@@ -599,7 +609,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
       <h2>Bring Ordnung in deine Wartung</h2>
       <p class="lead">Wir suchen zum Start einige Betriebe, die das Wartungsbuch kostenlos testen. Schreib uns kurz, was du für Geräte hast.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="mailto:DEINE-MAIL@BEISPIEL.DE?subject=Wartungsbuch%20testen&body=Hallo%2C%0A%0Aich%20interessiere%20mich%20f%C3%BCr%20das%20Wartungsbuch.%0A%0ABetrieb%3A%0ABranche%3A%0ACa.%20Anzahl%20Ger%C3%A4te%3A%0A">Kostenlos testen</a>
+        <a class="btn btn-primary js-mail" href="#kontakt" data-paket="Allgemein">Kostenlos testen</a>
       </div>
     </div>
   </div>
@@ -608,7 +618,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
 <footer>
   <div class="wrap foot">
     <span>© 2026 Test Firmenname</span>
-    <span><a href="#">Impressum</a> &nbsp;·&nbsp; <a href="#">Datenschutz</a></span>
+    <span><a href="impressum.html">Impressum</a> &nbsp;·&nbsp; <a href="datenschutz.html">Datenschutz</a></span>
   </div>
 </footer>
 
@@ -625,6 +635,15 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
   document.querySelectorAll('.rv').forEach(el=>{
     if(el.getBoundingClientRect().top<innerHeight)requestAnimationFrame(()=>el.classList.add('in'));
     else io.observe(el);
+  });
+
+
+  /* Kontakt: Mailadresse nur HIER eintragen */
+  const KONTAKT_MAIL='DEINE-MAIL@BEISPIEL.DE';
+  document.querySelectorAll('.js-mail').forEach(a=>{
+    const pk=a.dataset.paket,t=pk==='Allgemein'?'Wartungsbuch testen':pk+' testen';
+    const body=['Hallo,','','ich möchte das Wartungsbuch kostenlos testen'+(pk==='Allgemein'?'':' (Paket '+pk+')')+'.','','Betrieb:','Branche:','Ca. Anzahl Geräte:','Telefon (optional):','','Viele Grüße'].join(String.fromCharCode(10));
+    a.href='mailto:'+KONTAKT_MAIL+'?subject='+encodeURIComponent(t)+'&body='+encodeURIComponent(body);
   });
 
   /* Leise, motivierende Hintergrundmusik, selbst erzeugt (keine Datei, keine Rechte). Startet erst nach Klick. */
