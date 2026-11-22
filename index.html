@@ -175,6 +175,33 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
 .snd[aria-pressed="true"]{border-color:var(--ice);color:var(--ice)}
 
 .card .soon{position:absolute;top:18px;right:18px;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+
+.gk{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:50px;align-items:start}
+.gl{list-style:none}
+.gl li{padding:18px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:4px;counter-increment:g}
+.gl li:last-child{border-bottom:1px solid var(--line)}
+.gl b{font-weight:500;color:var(--off);font-size:1.02rem}
+.gl b::before{content:counter(g) "  ";color:var(--ice);font-family:var(--head)}
+.gl span{color:var(--muted);font-size:.95rem}
+.gl{counter-reset:g}
+.gcard{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:0 40px 80px -40px rgba(0,0,0,.7),0 0 60px -30px var(--glow)}
+.gc-top{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.gc-top>div:nth-child(2){flex:1}
+.gc-img{width:54px;height:54px;border-radius:14px;background:rgba(168,196,212,.1);display:grid;place-items:center}
+.gc-img svg{width:28px;height:28px;stroke:var(--ice);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.gc-name{font-family:var(--head);color:var(--off);font-size:1.2rem}
+.gcard small{color:var(--muted);font-size:.78rem}
+.pill.ok{background:rgba(143,209,168,.14);color:#8fd1a8}
+.gc-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.92rem;color:var(--off)}
+.gc-meta small{display:block}
+.gc-h{margin:20px 0 6px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ice)}
+.gc-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.92rem;color:var(--off)}
+.gc-row span{flex:1}
+.dot{width:9px;height:9px;border-radius:50%;display:block}
+.dot.g{background:#8fd1a8}.dot.y{background:#e3b873}
+.gc-foot{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.gc-foot span{font-size:.76rem;padding:5px 12px;border-radius:99px;border:1px solid var(--line);color:var(--silver)}
+@media(max-width:960px){.gk{grid-template-columns:1fr;gap:36px}}
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr}
   .phone-stage{margin-top:30px}
@@ -356,8 +383,9 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
       <div class="card big rv">
         <div class="ico"><svg viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 00-5 5L3 18l3 3 6.5-6.5a4 4 0 005-5l-3 3-2.5-.5-.5-2.5z"/></svg></div>
         <h3>Maschinen &amp; Geräte</h3>
-        <p>Fahrzeuge, Standmaschinen, ortsveränderliche Geräte, Brandschutz und Erste Hilfe. Du legst Prüfpunkte und Intervalle selbst fest, die App erinnert dich.</p>
-        <div class="tags"><span>Wartung</span><span>DGUV V3</span><span>Feuerlöscher</span><span>Stapler</span><span>Erste-Hilfe-Kasten</span></div>
+        <p>Jedes Gerät bekommt eine eigene Karte mit Steckbrief, mehreren Prüfarten, Fristen und Historie. Prüfpunkte legst du selbst an, so wie sie zu deinem Betrieb passen.</p>
+        <div class="tags"><span>Fahrzeuge</span><span>Standmaschinen</span><span>Ortsveränderliche Geräte</span><span>Brandschutz &amp; Erste Hilfe</span><span>DGUV V3</span></div>
+      </div>
       </div>
       <div class="card rv d1">
         <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h3v3h-3zM20 14v6h-3"/></svg></div>
@@ -417,6 +445,43 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
         <p>Handbuch, Prüfprotokoll und CE-Kennzeichnung hängen am Gerät und sind per QR-Code sofort greifbar.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="geraet">
+  <div class="wrap">
+    <span class="eyebrow rv">Maschinen &amp; Geräte</span>
+    <h2 class="rv d1">Eine Karte pro Gerät.<br>Alles an einem Ort.</h2>
+    <div class="gk">
+      <ul class="gl rv d1">
+        <li><b>Steckbrief</b><span>Name, Hersteller, Typ, Seriennummer, Baujahr, Standort, Foto und Verantwortlicher. Das, wonach Prüfer und Versicherer fragen.</span></li>
+        <li><b>Vier Kategorien</b><span>Fahrzeuge, Standmaschinen, ortsveränderliche Geräte sowie Brandschutz und Erste Hilfe.</span></li>
+        <li><b>Mehrere Prüfarten</b><span>Täglich Sichtprüfung, monatlich Wartung, jährlich die große Prüfung. Jede mit eigener Frist und eigenen Prüfpunkten.</span></li>
+        <li><b>Frist nach Datum oder Betriebsstunden</b><span>Der Stapler nach Stunden, der Feuerlöscher nach Kalender.</span></li>
+        <li><b>Prüfpunkte selbst anlegen und kopieren</b><span>Drei gleiche Feuerlöscher? Liste einmal anlegen, auf alle kopieren.</span></li>
+        <li><b>Historie, Dokumente, Mängel und QR-Code</b><span>Alles hängt am Gerät und ist per Scan erreichbar.</span></li>
+      </ul>
+      <div class="gcard rv d2" aria-hidden="true">
+        <div class="gc-top">
+          <div class="gc-img"><svg viewBox="0 0 24 24"><path d="M3 18h18M5 18V9h5v9M10 12h8v6M7 9V6h2v3"/></svg></div>
+          <div><div class="gc-name">Drehmaschine 2</div><small>Standmaschine · Halle A</small></div>
+          <span class="pill ok">im Einsatz</span>
+        </div>
+        <div class="gc-meta">
+          <div><small>Hersteller</small>Beispiel GmbH</div>
+          <div><small>Typ</small>DM 450</div>
+          <div><small>Seriennr.</small>0048152</div>
+          <div><small>Baujahr</small>2014</div>
+        </div>
+        <div class="gc-h">Prüfarten</div>
+        <div class="gc-row"><span>Sichtprüfung</span><small>täglich</small><i class="dot g"></i></div>
+        <div class="gc-row"><span>Wartung</span><small>monatlich</small><i class="dot y"></i></div>
+        <div class="gc-row"><span>Jahresprüfung</span><small>in 214 Tagen</small><i class="dot g"></i></div>
+        <div class="gc-row"><span>Ölwechsel</span><small>nach 500 Betriebsstunden</small><i class="dot g"></i></div>
+        <div class="gc-foot"><span>Historie</span><span>Dokumente</span><span>Mängel</span><span>QR-Code</span></div>
+      </div>
+    </div>
+    <p class="note">Beispielansicht. Zahlen und Namen sind erfunden.</p>
   </div>
 </section>
 
