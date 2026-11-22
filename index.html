@@ -113,6 +113,14 @@ nav.scrolled{background:rgba(21,23,26,.82);backdrop-filter:blur(14px);-webkit-ba
 .features{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:54px}
 .fgrid .card.big{grid-column:span 2}
+.fgrid .card.wide{grid-column:span 3}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+.mini .card{padding:18px 20px;border-radius:16px}
+.mini .ico{width:34px;height:34px;border-radius:10px;margin-bottom:10px}
+.mini .ico svg{width:18px;height:18px}
+.mini h3{font-size:.98rem;margin-bottom:4px}
+.mini p{font-size:.85rem;line-height:1.45}
+.mini .soon{top:12px;right:12px;font-size:.6rem;padding:2px 8px}
 .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .tags span{font-size:.78rem;padding:5px 12px;border-radius:99px;border:1px solid var(--line);color:var(--silver)}
 
@@ -205,8 +213,8 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr}
   .phone-stage{margin-top:30px}
-  .cols,.steps,.fgrid{grid-template-columns:1fr}
-  .fgrid .card.big{grid-column:auto}
+  .cols,.steps,.fgrid,.mini{grid-template-columns:1fr}
+  .fgrid .card.big,.fgrid .card.wide{grid-column:auto}
   .plans{grid-template-columns:1fr!important}
   .nav-links{display:none}
   section{padding:80px 0}
@@ -434,8 +442,32 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
         <p>Sicherheitsunterweisungen dokumentieren statt auf Zetteln: Dokumente hinterlegen, Teilnehmer eintragen, abhaken. Maschinen und Personal sind getrennte Bereiche, jeder sieht nur seinen.</p>
         <div class="tags"><span>Teilnehmerlisten</span><span>Nachweis</span><span>Datenschutz</span></div>
       </div>
+      <div class="card rv">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Ampel-Übersicht</h3>
+        <p>Grün: alles in Ordnung. Gelb: bald fällig. Rot: überfällig. Beim Öffnen siehst du sofort, was ansteht.</p>
+      </div>
+      <div class="card rv d1">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
+        <h3>Mängel festhalten</h3>
+        <p>Mangel eintragen und beschreiben. Er bleibt rot, bis er behoben ist. Wer, wann und was gemacht wurde, steht im Protokoll.</p>
+      </div>
+      <div class="card rv d2">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></div>
+        <h3>Gerät sperren</h3>
+        <p>„Außer Betrieb bis repariert“: Beim Scannen steht es sofort am Gerät, bevor jemand damit arbeitet.</p>
+      </div>
+      <div class="card wide rv">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg></div>
+        <h3>Foto und Notiz</h3>
+        <p>Mangel fotografieren, kurz beschreiben, fertig. Das Bild hängt direkt an der Prüfung und steht im PDF.</p>
+      </div>
     </div>
-    <p class="lead rv" style="margin-top:34px">In Arbeit: Ampel-Übersicht, Erinnerung vor der Frist, Foto und Notiz, Mängel melden, Gerät sperren, Dokumente am Gerät.</p>
+    <span class="eyebrow rv" style="margin-top:44px;font-size:.85rem">In Arbeit</span>
+    <div class="mini">
+      <div class="card rv d1"><span class="soon">Geplant</span><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1112 0v5l2 2H4z"/><path d="M10 20a2 2 0 004 0"/></svg></div><h3>Erinnerung vor der Frist</h3><p>Per Mail oder Handy-Hinweis, z. B. 14 Tage vorher.</p></div>
+      <div class="card rv d2"><span class="soon">Geplant</span><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg></div><h3>Dokumente am Gerät</h3><p>Handbuch und Protokoll per QR-Code sofort greifbar.</p></div>
+    </div>
   </div>
 </section>
 
