@@ -523,28 +523,68 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
     else io.observe(el);
   });
 
-  /* Leise Hintergrundmusik, selbst erzeugt (keine Datei, keine Rechte). Startet erst nach Klick. */
+  /* Leise, motivierende Hintergrundmusik, selbst erzeugt (keine Datei, keine Rechte). Startet erst nach Klick. */
   (function(){
-    const b=document.getElementById('snd');let ctx,master,on=false,started=false;
+    const b=document.getElementById('snd');
+    let ctx,master,noise,timer,on=false,started=false,next=0,step=0;
+    const BPM=112,SIXT=60/BPM/4;
+    const mf=n=>440*Math.pow(2,(n-69)/12);
+    // Akkorde je Takt: C, G, Am, F (Grundton, Terz, Quinte als MIDI)
+    const CH=[[48,[60,64,67,72]],[43,[59,62,67,71]],[45,[60,64,69,72]],[41,[60,65,69,72]]];
     function build(){
       ctx=new (window.AudioContext||window.webkitAudioContext)();
       master=ctx.createGain();master.gain.value=0;
-      const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=700;lp.Q.value=.4;
-      const lfo=ctx.createOscillator(),lg=ctx.createGain();lfo.frequency.value=.07;lg.gain.value=260;lfo.connect(lg);lg.connect(lp.frequency);lfo.start();
-      master.connect(lp);lp.connect(ctx.destination);
-      [[110,0],[164.81,5],[220,-4],[261.63,3],[329.63,-6],[392,4]].forEach(([f,d],i)=>{
-        const o=ctx.createOscillator(),g=ctx.createGain();
-        o.type=i%2?'triangle':'sine';o.frequency.value=f;o.detune.value=d;g.gain.value=.16/(1+i*.35);
-        const l=ctx.createOscillator(),lgn=ctx.createGain();l.frequency.value=.05+i*.019;lgn.gain.value=g.gain.value*.6;l.connect(lgn);lgn.connect(g.gain);l.start();
-        o.connect(g);g.connect(master);o.start();
-      });
-      started=true;
+      const comp=ctx.createDynamicsCompressor();
+      master.connect(comp);comp.connect(ctx.destination);
+      const buf=ctx.createBuffer(1,ctx.sampleRate,ctx.sampleRate),d=buf.getChannelData(0);
+      for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+      noise=buf;started=true;
+    }
+    function tone(t,f,len,type,vol,att){
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.type=type;o.frequency.value=f;
+      g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+(att||.005));g.gain.exponentialRampToValueAtTime(.0001,t+len);
+      o.connect(g);g.connect(master);o.start(t);o.stop(t+len+.05);
+    }
+    function kick(t){
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.frequency.setValueAtTime(130,t);o.frequency.exponentialRampToValueAtTime(42,t+.12);
+      g.gain.setValueAtTime(.55,t);g.gain.exponentialRampToValueAtTime(.0001,t+.22);
+      o.connect(g);g.connect(master);o.start(t);o.stop(t+.25);
+    }
+    function hat(t,v){
+      const s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();
+      s.buffer=noise;f.type='highpass';f.frequency.value=7000;
+      g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+.05);
+      s.connect(f);f.connect(g);g.connect(master);s.start(t);s.stop(t+.06);
+    }
+    function play(st,t){
+      const bar=Math.floor(st/16)%4,i=st%16,[root,ch]=CH[bar];
+      if(i%8===0)kick(t); if(i===10)kick(t);
+      if(i%4===2)hat(t,.07);
+      if(i===0||i===6||i===10)tone(t,mf(root-12),SIXT*3.5,'triangle',.5,.01);
+      if(i%2===0){const n=ch[[0,1,2,3,2,1,2,3][(i/2)%8]];tone(t,mf(n),.22,'triangle',.16,.004);}
+      if(i===0&&bar%2===0)tone(t,mf(ch[2]+12),SIXT*7,'sine',.07,.02);
+    }
+    function sched(){
+      while(next<ctx.currentTime+.2){play(step,next);next+=SIXT;step++;}
     }
     function set(v){
       on=v;b.setAttribute('aria-pressed',String(v));
-      try{localStorage.setItem('snd',v?'1':'0')}catch(e){}
-      if(v){if(!started)build();ctx.resume();master.gain.cancelScheduledValues(ctx.currentTime);master.gain.linearRampToValueAtTime(.35,ctx.currentTime+3)}
-      else if(started){master.gain.cancelScheduledValues(ctx.currentTime);master.gain.linearRampToValueAtTime(0,ctx.currentTime+1.2)}
+      if(v){
+        if(!started)build();
+        ctx.resume();
+        next=ctx.currentTime+.05;step=0;
+        master.gain.cancelScheduledValues(ctx.currentTime);
+        master.gain.setValueAtTime(master.gain.value,ctx.currentTime);
+        master.gain.linearRampToValueAtTime(.3,ctx.currentTime+1.5);
+        clearInterval(timer);timer=setInterval(sched,50);
+      }else if(started){
+        master.gain.cancelScheduledValues(ctx.currentTime);
+        master.gain.setValueAtTime(master.gain.value,ctx.currentTime);
+        master.gain.linearRampToValueAtTime(0,ctx.currentTime+.8);
+        setTimeout(()=>{if(!on)clearInterval(timer)},1000);
+      }
     }
     b.addEventListener('click',()=>set(!on));
   })();
