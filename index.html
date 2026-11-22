@@ -161,6 +161,11 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
 .cmp td:first-child{text-align:left;color:var(--off)}
 .cmp td.y::before{content:"";display:inline-block;width:12px;height:7px;border-left:2px solid var(--ice);border-bottom:2px solid var(--ice);transform:rotate(-45deg) translateY(-2px)}
 .cmp td.n::before{content:"–";color:var(--muted)}
+
+.cmp th small{display:block;font-family:var(--body);font-size:.72rem;color:var(--muted);margin-top:4px}
+.cmp td.h::before{content:"teilweise";font-size:.8rem;color:var(--muted)}
+.cmp th.us,.cmp td.us{background:rgba(168,196,212,.07)}
+.cmp th.us{color:var(--ice)}
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr}
   .phone-stage{margin-top:30px}
@@ -195,6 +200,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
       <a href="#problem">Warum</a>
       <a href="#ablauf">Ablauf</a>
       <a href="#funktionen">Funktionen</a>
+      <a href="#vergleich">Vergleich</a>
       <a href="#pakete">Pakete</a>
       <a href="#faq">Fragen</a>
     </div>
@@ -365,6 +371,29 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
         <p>Läuft im Browser und lässt sich als App aufs Handy installieren.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="vergleich">
+  <div class="wrap">
+    <span class="eyebrow rv">Der Vergleich</span>
+    <h2 class="rv d1">Warum nicht einfach eine andere App?</h2>
+    <p class="lead rv d2">Es gibt gute Programme am Markt. Die meisten können aber nur einen Teil: nur Elektroprüfung, nur Werkzeug oder gleich komplette Industrie-Software, die für kleine Betriebe zu groß ist.</p>
+    <div class="cmp rv" style="margin-top:50px">
+      <table>
+        <thead><tr><th></th><th>Reine Prüf-Apps<small>z. B. nur DGUV V3</small></th><th>Industrie-Software<small>für große Werke</small></th><th>Zettel &amp; Excel</th><th class="us">Test Firmenname</th></tr></thead>
+        <tbody>
+          <tr><td>Maschinen, Prüfungen, Brandschutz und Erste Hilfe in einer App</td><td class="h"></td><td class="y"></td><td class="h"></td><td class="y us"></td></tr>
+          <tr><td>Unterweisungen mit Nachweis im selben System</td><td class="n"></td><td class="h"></td><td class="h"></td><td class="y us"></td></tr>
+          <tr><td>QR-Code pro Gerät, Scan öffnet direkt das Gerät</td><td class="y"></td><td class="y"></td><td class="n"></td><td class="y us"></td></tr>
+          <tr><td>Selbst einrichten, keine Schulung nötig</td><td class="y"></td><td class="n"></td><td class="y"></td><td class="y us"></td></tr>
+          <tr><td>Passt zu kleinen Betrieben (Größe und Preis)</td><td class="y"></td><td class="n"></td><td class="y"></td><td class="y us"></td></tr>
+          <tr><td>Prüfpunkte und Fristen frei selbst festlegen</td><td class="h"></td><td class="y"></td><td class="y"></td><td class="y us"></td></tr>
+          <tr><td>Fristen werden überwacht, PDF-Nachweis per Knopfdruck</td><td class="y"></td><td class="y"></td><td class="n"></td><td class="y us"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Allgemeine Einschätzung typischer Angebote am Markt, Stand November 2026. Einzelne Anbieter können abweichen. Auch bei uns zählt, was du im Test selbst siehst.</p>
   </div>
 </section>
 
