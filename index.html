@@ -176,12 +176,6 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
 .cmp th.us,.cmp td.us{background:rgba(168,196,212,.07)}
 .cmp th.us{color:var(--ice)}
 
-.snd{opacity:.9;position:fixed;left:20px;bottom:20px;z-index:60;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;border:1px solid var(--line);background:rgba(21,23,26,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--silver);font:500 .85rem var(--body);cursor:pointer;transition:.25s}
-.snd:hover{border-color:var(--ice);color:var(--off)}
-.snd svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.snd .w{display:none}.snd[aria-pressed="true"] .w{display:inline}.snd[aria-pressed="true"] .x{display:none}
-.snd[aria-pressed="true"]{border-color:var(--ice);color:var(--ice)}
-
 .card .soon{position:absolute;top:18px;right:18px;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
 
 .gk{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:50px;align-items:start}
@@ -220,8 +214,6 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
   section{padding:80px 0}
 }
 @media(max-width:560px){
-  .snd span{display:none}
-  .snd{padding:11px;left:12px;bottom:12px}
   .wrap{padding:0 16px}
   .nav-in .logo{font-size:1rem;gap:8px}
   .nav-in .btn-sm{padding:9px 13px;font-size:.84rem}
@@ -655,10 +647,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
   </div>
 </footer>
 
-<button id="snd" class="snd" type="button" aria-pressed="false" aria-label="Hintergrundmusik an oder aus">
-  <svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 19V5L7.5 9.5z"/><path class="w" d="M15.5 9a4 4 0 010 6M18 6.5a8 8 0 010 11"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
-  <span>Musik</span>
-</button>
+
 
 <script>
   const nav=document.getElementById('nav');
@@ -678,62 +667,6 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
     const body=['Hallo,','','ich möchte das Wartungsbuch kostenlos testen'+(pk==='Allgemein'?'':' (Paket '+pk+')')+'.','','Betrieb:','Branche:','Ca. Anzahl Geräte:','Telefon (optional):','','Viele Grüße'].join(String.fromCharCode(10));
     a.href='mailto:'+KONTAKT_MAIL+'?subject='+encodeURIComponent(t)+'&body='+encodeURIComponent(body);
   });
-
-  /* Leise, beruhigende Hintergrundmusik, selbst erzeugt (keine Datei, keine Rechte). Startet erst nach Klick. */
-  (function(){
-    const b=document.getElementById('snd');
-    let ctx,master,timer,bell,on=false,started=false,idx=0;
-    const mf=n=>440*Math.pow(2,(n-69)/12);
-    const CH=[[45,57,60,64,67],[41,53,57,60,64],[48,55,60,64,67],[43,55,59,62,67]];
-    const PENTA=[69,72,74,76,79,81];
-    function build(){
-      ctx=new (window.AudioContext||window.webkitAudioContext)();
-      master=ctx.createGain();master.gain.value=0;
-      const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=900;lp.Q.value=.3;
-      const lfo=ctx.createOscillator(),lg=ctx.createGain();lfo.frequency.value=.06;lg.gain.value=300;lfo.connect(lg);lg.connect(lp.frequency);lfo.start();
-      const dl=ctx.createDelay(1.5);dl.delayTime.value=.55;const fb=ctx.createGain();fb.gain.value=.4;const wet=ctx.createGain();wet.gain.value=.35;
-      master.connect(lp);lp.connect(ctx.destination);
-      lp.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(wet);wet.connect(ctx.destination);
-      started=true;
-    }
-    function pad(){
-      const t=ctx.currentTime,ch=CH[idx%CH.length];idx++;
-      ch.forEach((n,i)=>{
-        const o=ctx.createOscillator(),g=ctx.createGain();
-        o.type=i<2?'sine':'triangle';o.frequency.value=mf(n);o.detune.value=(i%2?4:-4);
-        const v=i<2?.11:.05;
-        g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+4);g.gain.linearRampToValueAtTime(v*.8,t+9);g.gain.linearRampToValueAtTime(0,t+14);
-        o.connect(g);g.connect(master);o.start(t);o.stop(t+14.5);
-      });
-    }
-    function chime(){
-      if(!on)return;
-      const t=ctx.currentTime,n=PENTA[Math.floor(Math.random()*PENTA.length)];
-      const o=ctx.createOscillator(),g=ctx.createGain();
-      o.type='sine';o.frequency.value=mf(n);
-      g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.05,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+4);
-      o.connect(g);g.connect(master);o.start(t);o.stop(t+4.2);
-      bell=setTimeout(chime,4000+Math.random()*5000);
-    }
-    function set(v){
-      on=v;b.setAttribute('aria-pressed',String(v));
-      if(v){
-        if(!started)build();
-        ctx.resume();
-        master.gain.cancelScheduledValues(ctx.currentTime);
-        master.gain.setValueAtTime(master.gain.value,ctx.currentTime);
-        master.gain.linearRampToValueAtTime(.5,ctx.currentTime+3);
-        pad();clearInterval(timer);timer=setInterval(pad,9000);
-        clearTimeout(bell);bell=setTimeout(chime,3000);
-      }else if(started){
-        master.gain.cancelScheduledValues(ctx.currentTime);
-        master.gain.setValueAtTime(master.gain.value,ctx.currentTime);
-        master.gain.linearRampToValueAtTime(0,ctx.currentTime+1.5);
-        clearInterval(timer);clearTimeout(bell);
-      }
-    }
-    b.addEventListener('click',()=>set(!on));
-  })();
 </script>
 </body>
 </html>
