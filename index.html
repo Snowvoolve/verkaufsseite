@@ -167,6 +167,12 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
 .cmp td.h::before{content:"teilweise";font-size:.8rem;color:var(--muted)}
 .cmp th.us,.cmp td.us{background:rgba(168,196,212,.07)}
 .cmp th.us{color:var(--ice)}
+
+.snd{position:fixed;left:20px;bottom:20px;z-index:60;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;border:1px solid var(--line);background:rgba(21,23,26,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--silver);font:500 .85rem var(--body);cursor:pointer;transition:.25s}
+.snd:hover{border-color:var(--ice);color:var(--off)}
+.snd svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.snd .w{display:none}.snd[aria-pressed="true"] .w{display:inline}.snd[aria-pressed="true"] .x{display:none}
+.snd[aria-pressed="true"]{border-color:var(--ice);color:var(--ice)}
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr}
   .phone-stage{margin-top:30px}
@@ -502,6 +508,11 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
   </div>
 </footer>
 
+<button id="snd" class="snd" type="button" aria-pressed="false" aria-label="Hintergrundmusik an oder aus">
+  <svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 19V5L7.5 9.5z"/><path class="w" d="M15.5 9a4 4 0 010 6M18 6.5a8 8 0 010 11"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+  <span>Musik</span>
+</button>
+
 <script>
   const nav=document.getElementById('nav');
   const onScroll=()=>nav.classList.toggle('scrolled',scrollY>20);
@@ -511,6 +522,32 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
     if(el.getBoundingClientRect().top<innerHeight)requestAnimationFrame(()=>el.classList.add('in'));
     else io.observe(el);
   });
+
+  /* Leise Hintergrundmusik, selbst erzeugt (keine Datei, keine Rechte). Startet erst nach Klick. */
+  (function(){
+    const b=document.getElementById('snd');let ctx,master,on=false,started=false;
+    function build(){
+      ctx=new (window.AudioContext||window.webkitAudioContext)();
+      master=ctx.createGain();master.gain.value=0;
+      const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=700;lp.Q.value=.4;
+      const lfo=ctx.createOscillator(),lg=ctx.createGain();lfo.frequency.value=.07;lg.gain.value=260;lfo.connect(lg);lg.connect(lp.frequency);lfo.start();
+      master.connect(lp);lp.connect(ctx.destination);
+      [[110,0],[164.81,5],[220,-4],[261.63,3],[329.63,-6],[392,4]].forEach(([f,d],i)=>{
+        const o=ctx.createOscillator(),g=ctx.createGain();
+        o.type=i%2?'triangle':'sine';o.frequency.value=f;o.detune.value=d;g.gain.value=.16/(1+i*.35);
+        const l=ctx.createOscillator(),lgn=ctx.createGain();l.frequency.value=.05+i*.019;lgn.gain.value=g.gain.value*.6;l.connect(lgn);lgn.connect(g.gain);l.start();
+        o.connect(g);g.connect(master);o.start();
+      });
+      started=true;
+    }
+    function set(v){
+      on=v;b.setAttribute('aria-pressed',String(v));
+      try{localStorage.setItem('snd',v?'1':'0')}catch(e){}
+      if(v){if(!started)build();ctx.resume();master.gain.cancelScheduledValues(ctx.currentTime);master.gain.linearRampToValueAtTime(.35,ctx.currentTime+3)}
+      else if(started){master.gain.cancelScheduledValues(ctx.currentTime);master.gain.linearRampToValueAtTime(0,ctx.currentTime+1.2)}
+    }
+    b.addEventListener('click',()=>set(!on));
+  })();
 </script>
 </body>
 </html>
