@@ -115,7 +115,7 @@ nav.scrolled{background:rgba(21,23,26,.82);backdrop-filter:blur(14px);-webkit-ba
 .plan{border:1px solid var(--line);border-radius:22px;padding:30px 24px;background:var(--card);display:flex;flex-direction:column;transition:.3s}
 .plan:hover{transform:translateY(-4px);border-color:rgba(168,196,212,.4)}
 .plan.hot{border-color:var(--ice);background:linear-gradient(180deg,rgba(168,196,212,.09),var(--card));position:relative}
-.plan.hot::after{content:"Beliebt";position:absolute;top:-12px;left:24px;background:var(--ice);color:#12161A;font-size:.72rem;font-weight:600;padding:3px 12px;border-radius:99px}
+.plan.hot::after{content:"Volle Version";position:absolute;top:-12px;left:24px;background:var(--ice);color:#12161A;font-size:.72rem;font-weight:600;padding:3px 12px;border-radius:99px}
 .plan h3{margin-bottom:4px}
 .plan .for{color:var(--muted);font-size:.88rem;margin-bottom:20px;min-height:44px}
 .price{font-family:var(--head);font-size:1.5rem;color:var(--off);margin-bottom:20px}
@@ -150,12 +150,23 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
 .rv.in{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 
+
+/* Pakete neu */
+.plans{grid-template-columns:repeat(3,1fr)!important}
+.plan li b{color:var(--off);font-weight:600}
+.cmp{margin-top:50px;overflow-x:auto;border:1px solid var(--line);border-radius:20px;background:var(--card)}
+.cmp table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:520px}
+.cmp th,.cmp td{padding:15px 20px;text-align:center;border-top:1px solid var(--line)}
+.cmp thead th{border-top:0;font-family:var(--head);font-weight:400;color:var(--off);font-size:1.1rem}
+.cmp td:first-child{text-align:left;color:var(--off)}
+.cmp td.y::before{content:"";display:inline-block;width:12px;height:7px;border-left:2px solid var(--ice);border-bottom:2px solid var(--ice);transform:rotate(-45deg) translateY(-2px)}
+.cmp td.n::before{content:"–";color:var(--muted)}
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr}
   .phone-stage{margin-top:30px}
   .cols,.steps,.fgrid{grid-template-columns:1fr}
   .fgrid .card.big{grid-column:auto}
-  .plans{grid-template-columns:1fr 1fr}
+  .plans{grid-template-columns:1fr!important}
   .nav-links{display:none}
   section{padding:80px 0}
 }
@@ -296,6 +307,31 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
   </div>
 </section>
 
+<section id="selbst">
+  <div class="wrap">
+    <span class="eyebrow rv">Alles selbst erledigen</span>
+    <h2 class="rv d1">Jeder im Betrieb macht seinen Teil.<br>Ohne Hilfe von außen.</h2>
+    <p class="lead rv d2">Niemand muss bei dir vorbeifahren und nichts musst du erst anfragen. Die App ist so gebaut, dass du sie ohne Schulung benutzt.</p>
+    <div class="cols">
+      <div class="card rv">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 21V9l9-6 9 6v12z"/><path d="M9 21v-7h6v7"/></svg></div>
+        <h3>Chef und Meister</h3>
+        <p>Legen Geräte, Prüfpunkte und Fristen an, vergeben Aufgaben, laden Mitarbeiter ein und behalten den Überblick über alles Fällige.</p>
+      </div>
+      <div class="card rv d1">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M16 5.5a3 3 0 010 5.8M18 14.5c1.8.8 3 2.6 3 5.5"/></svg></div>
+        <h3>Mitarbeiter</h3>
+        <p>Scannen den QR-Code am Gerät, sehen sofort die Prüfpunkte und haken sie ab. Mehr müssen sie nicht können.</p>
+      </div>
+      <div class="card rv d2">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 14l2 2 4-4"/></svg></div>
+        <h3>Sicherheitsbeauftragte und Prüfer</h3>
+        <p>Rufen die komplette Historie pro Gerät ab und drucken den Nachweis als PDF, wenn Prüfer oder Versicherung fragen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="features" id="funktionen">
   <div class="wrap">
     <span class="eyebrow rv">Funktionen</span>
@@ -335,39 +371,68 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:.88rem;color:va
 <section id="pakete">
   <div class="wrap">
     <span class="eyebrow rv">Pakete</span>
-    <h2 class="rv d1">Wähle, was zu deinem Betrieb passt</h2>
-    <p class="lead rv d2">Vom Einzelbetrieb bis zur größeren Werkstatt. Du kannst jederzeit wechseln.</p>
+    <h2 class="rv d1">Starte groß. Oder klein.<br>Du entscheidest.</h2>
+    <p class="lead rv d2">Ultimate ist die volle Version: Dein Betrieb erledigt alles selbst, ohne dass jemand bei dir vorbeikommen muss. Premium und Starter sind genau dieselbe App, nur mit weniger Geräten und weniger Nutzern.</p>
     <div class="plans">
-      <div class="plan rv">
-        <h3>Starter</h3>
-        <div class="for">Für den Einstieg und kleine Betriebe</div>
+      <div class="plan hot rv">
+        <h3>Ultimate</h3>
+        <div class="for">Die volle Version für den ganzen Betrieb</div>
         <div class="price">Preis folgt<small>zum Start kostenlos testen</small></div>
-        <ul><li>5 Geräte nach Wahl</li><li>Wartung und Dokumentation</li><li>QR-Codes und PDF</li><li>Eigene Unterweisungen</li></ul>
-        <a href="#kontakt" class="btn btn-ghost">Interesse melden</a>
+        <ul>
+          <li>Bis zu <b>100 Geräte</b> und Positionen</li>
+          <li>Bis zu <b>20 Nutzer</b> (Meister, Mitarbeiter, Sicherheitsbeauftragte)</li>
+          <li>Maschinen und Personal (Unterweisungen)</li>
+          <li>Alle Einstellmöglichkeiten</li>
+          <li>Fertige Unterweisungen nach Bereich</li>
+          <li>QR-Codes und PDF-Nachweise ohne Limit</li>
+        </ul>
+        <a href="#kontakt" class="btn btn-primary">Ultimate testen</a>
       </div>
-      <div class="plan hot rv d1">
+      <div class="plan rv d1">
         <h3>Premium</h3>
-        <div class="for">Für Werkstätten mit mehreren Geräten</div>
+        <div class="for">Dieselbe App, etwa die Hälfte</div>
         <div class="price">Preis folgt<small>zum Start kostenlos testen</small></div>
-        <ul><li>10 Geräte nach Wahl</li><li>Mehr Einstellmöglichkeiten</li><li>Fertige Unterweisungen nach Bereich</li><li>Alles aus Starter</li></ul>
-        <a href="#kontakt" class="btn btn-primary">Interesse melden</a>
+        <ul>
+          <li>Bis zu <b>50 Geräte</b></li>
+          <li>Bis zu <b>10 Nutzer</b></li>
+          <li>Maschinen und Personal</li>
+          <li>Viele Einstellmöglichkeiten</li>
+          <li>Fertige Unterweisungen nach Bereich</li>
+          <li>QR-Codes und PDF-Nachweise</li>
+        </ul>
+        <a href="#kontakt" class="btn btn-ghost">Premium testen</a>
       </div>
       <div class="plan rv d2">
-        <h3>Ultimate</h3>
-        <div class="for">Für größere Betriebe mit vielen Geräten</div>
+        <h3>Starter</h3>
+        <div class="for">Zum Einsteigen, mit Geräten nach Wahl</div>
         <div class="price">Preis folgt<small>zum Start kostenlos testen</small></div>
-        <ul><li>Größter Funktionsumfang</li><li>Viele Geräte und Positionen</li><li>Mehrere Nutzer und Rollen</li><li>Alles aus Premium</li></ul>
-        <a href="#kontakt" class="btn btn-ghost">Interesse melden</a>
-      </div>
-      <div class="plan rv d3">
-        <h3>Individuell</h3>
-        <div class="for">Deine Aufgabe, dein Angebot</div>
-        <div class="price">Auf Anfrage<small>fester Leistungsumfang</small></div>
-        <ul><li>Persönliche Betreuung</li><li>Einrichtung vor Ort</li><li>Anpassungen nach Absprache</li><li>Schriftliches Angebot</li></ul>
-        <a href="#kontakt" class="btn btn-ghost">Anfrage stellen</a>
+        <ul>
+          <li><b>5 Geräte</b> nach Wahl</li>
+          <li><b>2 Nutzer</b> für Wartung und Dokumentation</li>
+          <li>Eigene Unterweisungen hochladen</li>
+          <li>Grundeinstellungen</li>
+          <li>QR-Codes und PDF-Nachweise</li>
+        </ul>
+        <a href="#kontakt" class="btn btn-ghost">Starter testen</a>
       </div>
     </div>
-    <p class="note">Geräte-Zuschlag nach Aufwand: Kleingeräte wie Feuerlöscher und Großgeräte wie Drehmaschinen werden getrennt dazugebucht. Preise und Details folgen.</p>
+
+    <div class="cmp rv">
+      <table>
+        <thead><tr><th></th><th>Ultimate</th><th>Premium</th><th>Starter</th></tr></thead>
+        <tbody>
+          <tr><td>Geräte und Positionen</td><td>bis 100</td><td>bis 50</td><td>5</td></tr>
+          <tr><td>Nutzer</td><td>bis 20</td><td>bis 10</td><td>2</td></tr>
+          <tr><td>Wartung, Prüfungen, Fristen</td><td class="y"></td><td class="y"></td><td class="y"></td></tr>
+          <tr><td>QR-Code pro Gerät</td><td class="y"></td><td class="y"></td><td class="y"></td></tr>
+          <tr><td>PDF-Nachweis</td><td class="y"></td><td class="y"></td><td class="y"></td></tr>
+          <tr><td>Personal und Unterweisungen</td><td class="y"></td><td class="y"></td><td>eigene Dokumente</td></tr>
+          <tr><td>Fertige Unterweisungen</td><td class="y"></td><td class="y"></td><td class="n"></td></tr>
+          <tr><td>Einstellmöglichkeiten</td><td>alle</td><td>viele</td><td>Grundlagen</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Alle Zahlen sind Startwerte und können sich noch ändern. Preise folgen. Du richtest alles selbst ein, in jedem Paket.</p>
   </div>
 </section>
 
